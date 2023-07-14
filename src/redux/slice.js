@@ -1,29 +1,54 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  addContactThunk,
+  deleteContactThunk,
+  fetchContactThunk,
+} from './operetions';
 
 const initialState = {
-  contacts: [
-    { id: 'id-1', name: 'Valeriy Zalujniy', number: '111-11-11' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    { id: 'id-5', name: 'Rosie Simpson', number: '459-12-56' },
-  ],
+  contacts: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
   filter: '',
+};
+
+const rejected = (state, action) => {
+  state.loading = false;
+  state.error = action.payload;
+};
+const pending = (state, action) => {
+  state.loading = true;
+  state.error = '';
 };
 
 const contactSlice = createSlice({
   name: 'contacts',
   initialState: initialState,
   reducers: {
-    addContact(state, { payload }) {
-      state.contacts.push(payload);
-    },
-    deleteContact(state, { payload }) {
-      state.contacts = state.contacts.filter(contact => contact.id !== payload);
-    },
     filterContact(state, { payload }) {
       state.filter = payload;
     },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchContactThunk.fulfilled, (state, action) => {
+        state.contacts = action.payload;
+        state.loading = false;
+      })
+      .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
+        state.contacts = state.contacts.filter(
+          contact => contact.id !== payload.id
+        );
+        state.loading = false;
+      })
+      .addCase(addContactThunk.fulfilled, (state, action) => {
+        state.contacts.push(action.payload);
+        state.loading = false;
+      })
+      .addMatcher(action => action.type.endsWith('/pending'), pending)
+      .addMatcher(action => action.type.endsWith('/rejected'), rejected);
   },
 });
 

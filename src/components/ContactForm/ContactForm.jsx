@@ -17,34 +17,37 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={s.form}>
-      <label className={s.label}>
-        <p className={s.parag}>Name</p>
-        <input
-          className={s.input}
-          type="text"
-          name="name"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-      </label>
-      <label className={s.label}>
-        <p className={s.parag}>Number</p>
-        <input
-          className={s.input}
-          type="tel"
-          name="number"
-          value={number}
-          onChange={e => setNumber(e.target.value)}
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-      </label>
-      <button type="submit" className={s.submit}>
-        Add contact
-      </button>
-    </form>
+    <>
+      <h1>PhoneBook</h1>
+      <form onSubmit={handleSubmit} className={s.form}>
+        <label className={s.label}>
+          <p className={s.parag}>Name</p>
+          <input
+            className={s.input}
+            type="text"
+            name="name"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+          />
+        </label>
+        <label className={s.label}>
+          <p className={s.parag}>Number</p>
+          <input
+            className={s.input}
+            type="tel"
+            name="number"
+            value={number}
+            onChange={e => setNumber(e.target.value)}
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          />
+        </label>
+        <button type="submit" className={s.submit}>
+          Add contact
+        </button>
+      </form>
+    </>
   );
 };

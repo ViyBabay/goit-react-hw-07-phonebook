@@ -11,13 +11,16 @@ export const Filter = () => {
   };
 
   return (
-    <label className={s.label}>
-      <p className={s.parag}>Find contact by name:</p>
-      <input
-        className={s.input}
-        type="text"
-        onChange={handleFilterChange}
-      ></input>
-    </label>
+    <>
+      <h2>Contacts</h2>
+      <label className={s.label}>
+        <p className={s.parag}>Find contact by name:</p>
+        <input
+          className={s.input}
+          type="text"
+          onChange={handleFilterChange}
+        ></input>
+      </label>
+    </>
   );
 };
