@@ -22,7 +22,7 @@ export const ContactList = () => {
     <ul>
       {visibleContacts.map(contact => (
         <li key={contact.id} className={s.list}>
-          {contact.name}: {contact.number}
+          {contact.name}: {contact.phone}
           <button
             onClick={() => dispatch(deleteContactThunk(contact.id))}
             className={s.delBtn}
