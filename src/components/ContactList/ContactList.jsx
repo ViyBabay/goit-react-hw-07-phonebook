@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContactThunk } from 'redux/operations';
-import { selectContacts, selectFilter } from 'redux/slice';
+import { selectContacts, selectFilter } from 'redux/selectors';
 import s from './ContactList.module.css';
 
 const getVisibleContacts = (contacts, filter) => {
@@ -15,7 +15,6 @@ export const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
 
-  // console.log(filter);
   const visibleContacts = getVisibleContacts(contacts, filter);
 
   return (

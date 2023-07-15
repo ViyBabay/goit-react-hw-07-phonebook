@@ -5,7 +5,6 @@ import s from './Filter.module.css';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  // const filter = useSelector(selectFilter);
 
   const handleFilterChange = e => {
     dispatch(filterContact(e.target.value));

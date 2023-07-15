@@ -6,13 +6,13 @@ import s from './ContactForm.module.css';
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addContactThunk({ name, number }));
+    dispatch(addContactThunk({ name, phone }));
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -37,8 +37,8 @@ export const ContactForm = () => {
             className={s.input}
             type="tel"
             name="number"
-            value={number}
-            onChange={e => setNumber(e.target.value)}
+            value={phone}
+            onChange={e => setPhone(e.target.value)}
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />

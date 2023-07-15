@@ -4,9 +4,10 @@ import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContactThunk } from 'redux/operations';
-import { selectError } from 'redux/slice';
+
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { selectError } from 'redux/selectors';
 
 export const App = () => {
   const dispatch = useDispatch();
