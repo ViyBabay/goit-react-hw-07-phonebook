@@ -19,7 +19,7 @@ const rejected = (state, action) => {
   state.error = action.payload;
 };
 const pending = (state, action) => {
-  state.loading = true;
+  state.isLoading = true;
   state.error = '';
 };
 
