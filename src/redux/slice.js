@@ -15,7 +15,7 @@ const initialState = {
 };
 
 const rejected = (state, action) => {
-  state.loading = false;
+  state.isLoading = false;
   state.error = action.payload;
 };
 const pending = (state, action) => {
@@ -33,19 +33,23 @@ const contactSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchContactThunk.fulfilled, (state, action) => {
-        state.contacts = action.payload;
-        state.loading = false;
+      .addCase(fetchContactThunk.fulfilled, (state, { payload }) => {
+        state.contacts.isLoading = false;
+        state.contacts.error = null;
+        state.contacts.items = payload;
       })
       .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
-        state.contacts = state.contacts.items.filter(
-          contact => contact.id !== payload.id
+        state.contacts.isLoading = false;
+        state.contacts.error = null;
+        const index = state.contacts.items.findIndex(
+          task => task.id === payload.id
         );
-        state.loading = false;
+        state.contacts.items.splice(index, 1);
       })
-      .addCase(addContactThunk.fulfilled, (state, action) => {
-        state.contacts.items.push(action.payload);
-        state.loading = false;
+      .addCase(addContactThunk.fulfilled, (state, { payload }) => {
+        state.contacts.items = [...state.contacts.items, payload];
+        state.contacts.isLoading = false;
+        state.contacts.error = null;
       })
       .addMatcher(action => action.type.endsWith('/pending'), pending)
       .addMatcher(action => action.type.endsWith('/rejected'), rejected);
